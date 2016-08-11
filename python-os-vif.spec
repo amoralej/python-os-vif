@@ -10,7 +10,7 @@
 
 Name:       python-%{library}
 Version:    1.1.0
-Release:    1%{?dist}
+Release:    2%{?dist}
 Summary:    OpenStack os-vif library
 License:    ASL 2.0
 URL:        http://launchpad.net/%{library}/
@@ -52,18 +52,26 @@ Requires:   python-stevedore >= 1.16.0
 Requires:   python-oslo-concurrency >= 3.11.0
 
 %description -n python2-%{library}
-OpenStack os-vif library.
+A library for plugging and unplugging virtual interfaces in OpenStack.
 
 
 %package -n python2-%{library}-tests
 Summary:    OpenStack os-vif library tests
 Requires:   python2-%{library} = %{version}-%{release}
+Requires:   python-hacking
+Requires:   python-coverage
+Requires:   python-subunit
+Requires:   python-oslotest
+Requires:   python-testrepository
+Requires:   python-testscenarios
+Requires:   python-testtools
+Requires:   python2-oslo-versionedobjects-tests
+
 
 %description -n python2-%{library}-tests
-OpenStack os-vif library.
+A library for plugging and unplugging virtual interfaces in OpenStack.
 
-This package contains the os-vif library test files.
-
+This package contains the library test files.
 
 %package -n python-%{library}-doc
 Summary:    OpenStack os-vif library documentation
@@ -73,7 +81,7 @@ BuildRequires: python-oslo-sphinx
 BuildRequires: python-reno
 
 %description -n python-%{library}-doc
-OpenStack os-vif library.
+A library for plugging and unplugging virtual interfaces in OpenStack.
 
 This package contains the documentation.
 
@@ -99,8 +107,6 @@ BuildRequires:  python3-oslo-privsep
 BuildRequires:  python3-oslo-versionedobjects
 BuildRequires:  python3-oslo-versionedobjects-tests
 
-
-
 Requires:   python3-pbr >= 1.6
 Requires:   python3-netaddr >= 0.7.12
 Requires:   python3-oslo-config >= 2:3.14.0
@@ -112,30 +118,35 @@ Requires:   python3-six >= 1.9.0
 Requires:   python3-stevedore >= 1.16.0
 Requires:   python3-oslo-concurrency >= 3.11.0
 
-
 %description -n python3-%{library}
-OpenStack os-vif library.
-
+A library for plugging and unplugging virtual interfaces in OpenStack.
 
 %package -n python3-%{library}-tests
 Summary:    OpenStack os-vif library tests
 Requires:   python3-%{library} = %{version}-%{release}
+Requires:   python3-hacking
+Requires:   python3-coverage
+Requires:   python3-subunit
+Requires:   python3-oslotest
+Requires:   python3-testrepository
+Requires:   python3-testscenarios
+Requires:   python3-testtools
+Requires:   python3-oslo-versionedobjects-tests
+
 
 %description -n python3-%{library}-tests
-OpenStack os-vif library.
+A library for plugging and unplugging virtual interfaces in OpenStack.
 
-This package contains the os-vif library test files.
+This package contains the library test files.
 
 %endif # with_python3
 
 
 %description
-OpenStack os-vif library.
-
+A library for plugging and unplugging virtual interfaces in OpenStack.
 
 %prep
 %autosetup -n %{module}-%{version} -S git
-ls -l
 
 # Let's handle dependencies ourseleves
 rm -f *requirements.txt
@@ -195,3 +206,9 @@ rm -rf .testrepository
 %endif # with_python3
 
 %changelog
+* Thu Aug 11 2016 Alfredo Moralejo <amoralej@redhat.com> - 1.1.0-2
+- Fixed Requires for -tests packages
+- Fixed the description field
+
+* Thu Aug 11 2016 Alfredo Moralejo <amoralej@redhat.com> - 1.1.0-1
+- initial package
